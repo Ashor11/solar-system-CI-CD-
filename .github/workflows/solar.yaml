@@ -1,7 +1,7 @@
 name: solar system
 on:
   push:
-    branches: [feature/*, main]
+    branches: [main]
 jobs:
   unit-test:
     name: unit-test
