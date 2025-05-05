@@ -1,11 +1,7 @@
 name: solar system
 on:
   push:
-    branches: [feature]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
-
+    branches: [feature/*, main]
 jobs:
   unit-test:
     name: unit-test
