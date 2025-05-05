@@ -1,0 +1,48 @@
+name: solar system
+on:
+  push:
+    branches: [feature]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  unit-test:
+    name: unit-test
+    strategy:
+      matrix:
+        os: [ubuntu-latest,windows-latest,macos-latest]
+        node-version: [20]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'    
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+  npm-coverage:  
+    name: npm-coverage
+    strategy:
+      matrix:
+        os: [ubuntu-latest,windows-latest,macos-latest]
+        node-version: [20]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'    
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests with coverage
+        run: npm run test coverage
+        
